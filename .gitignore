@@ -1,0 +1,30 @@
+# Node dependencies
+node_modules/
+
+# Tailwind CLI cache
+.tailwind-cache/
+
+# Tailwind output CSS
+src/output.css
+
+# Build folders (if used)
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+
+# Editor folders and swap files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
