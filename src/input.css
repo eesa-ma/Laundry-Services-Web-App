@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
-.head {
-    @apply text-3xl font-bold underline;
+.header {
+    @apply flex justify-around;
+    ul {
+        @apply flex gap-20 ;
+    }
 }
