@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
@@ -28,7 +28,7 @@
                 <h1 id="heroHead"></h1>
                 <p id="heroDescription"></p>
 
-                <button type="submit" id="bookButton">Book a service today </button>
+                <a href="#leftDivBooking"><button type="submit" id="bookButton">Book a service today </button></a>
             </div>
             <div class="rightDiv">
                 <img src="../assets/images/washingmachine.png" alt="">
@@ -52,7 +52,42 @@
             </div>
         </section>
         <section class="serviceBooking">
+            <div class="leftDivBooking" id="leftDivBooking">
+                <h1>Our Services</h1>
+                <p class="border-b pb-5">Click On The Cart Button To Add The Services To Your Cart </p>
+            </div>
+            <div class="rightDivBooking">
+                <div class="firstDiv">
+                    <h1>Added items</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
+                        </tbody>
+                    </table>
+                </div>
+                <div class="secondDiv">
+                    <h1>Book Now</h1>
+                    <form action="">
+                        <div>
+                            <label for="userName">Full Name</label>
+                            <input type="text" name="userName" id="userName" class="border">
+                        </div>
+                        <div>
+                            <label for="userEmail">Email ID</label>
+                            <input type="email" name="userEmail" id="userEmail" class="border">
+                            <label for="userPhoneNumber">Phone Number</label>
+                            <input type="tel" name="userPhoneNumber" id="userPhoneNumber" class="border">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
     <script src="./script.js"></script>
