@@ -19,16 +19,16 @@
 }
 
 .heroSection {
-    @apply flex m-10;
+    @apply flex m-10 justify-center items-center;
 }
 
 .leftDiv {
-    @apply w-1/2 px-20;
+    @apply w-1/2 pl-30;
     #heroHead {
-        @apply text-6xl font-bold;
+        @apply text-6xl font-bold leading-20;
     }
     #heroDescription {
-        @apply max-w-l;
+        @apply max-w-lg leading-loose;
     }
 }
 
