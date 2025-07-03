@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanCare Laundry Services</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .user-name {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            background: white;
+            color: #f5576c;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Service Overview */
+        .service-overview {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 60px 0;
+            color: white;
+        }
+
+        .overview-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Booking Services Section */
+        .booking-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .booking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 0 2rem;
+        }
+
+        .services-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .services-list h2 {
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .service-info h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .service-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .cart-info {
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* Cart and Booking Form */
+        .cart-booking {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cart-section, .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .cart-section h2, .booking-form h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .cart-items {
+            min-height: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .total-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #667eea;
+            text-align: right;
+            padding: 1rem;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .book-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* Quality Description */
+        .quality-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .quality-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .quality-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .quality-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .quality-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .quality-item h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            color: white;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .subscribe-btn {
+            background: white;
+            color: #667eea;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #667eea;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #764ba2;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🧺 CleanCare</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <div class="user-name">Welcome, Guest</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Premium Laundry Services</h1>
+                <p>Experience the best laundry care with our professional cleaning services. We ensure your clothes are treated with utmost care and returned fresh and clean.</p>
+                <button class="hero-btn" onclick="scrollToBooking()">Book a Service Today</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Laundry Services">
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Overview -->
+    <section class="service-overview">
+        <div class="overview-container">
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Laundry Services</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">240+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2+</div>
+                <div class="stat-label">Years of Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Services Section -->
+    <section id="services" class="booking-section">
+        <div class="booking-container">
+            <!-- Services List -->
+            <div class="services-list">
+                <h2>Our Services</h2>
+                <div class="service-item">
+                    <div class="service-info">
+                        <h3>Wash & Fold</h3>
+                        <div class="service-price">₹150</div>
+                    </div>
+                    <div class="service-buttons">
+                        <button class="btn add-btn" onclick="addToCart('Wash & Fold', 150)">Add Items</button>
+                        <button class="btn remove-btn" onclick="removeFromCart('Wash & Fold')">Remove Now</button>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-info">
+                        <h3>Dry Cleaning</h3>
+                        <div class="service-price">₹300</div>
+                    </div>
+                    <div class="service-buttons">
+                        <button class="btn add-btn" onclick="addToCart('Dry Cleaning', 300)">Add Items</button>
+                        <button class="btn remove-btn" onclick="removeFromCart('Dry Cleaning')">Remove Now</button>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-info">
+                        <h3>Premium Wash</h3>
+                        <div class="service-price">₹200</div>
+                    </div>
+                    <div class="service-buttons">
+                        <button class="btn add-btn" onclick="addToCart('Premium Wash', 200)">Add Items</button>
+                        <button class="btn remove-btn" onclick="removeFromCart('Premium Wash')">Remove Now</button>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-info">
+                        <h3>Express Service</h3>
+                        <div class="service-price">₹250</div>
+                    </div>
+                    <div class="service-buttons">
+                        <button class="btn add-btn" onclick="addToCart('Express Service', 250)">Add Items</button>
+                        <button class="btn remove-btn" onclick="removeFromCart('Express Service')">Remove Now</button>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-info">
+                        <h3>Ironing Service</h3>
+                        <div class="service-price">₹100</div>
+                    </div>
+                    <div class="service-buttons">
+                        <button class="btn add-btn" onclick="addToCart('Ironing Service', 100)">Add Items</button>
+                        <button class="btn remove-btn" onclick="removeFromCart('Ironing Service')">Remove Now</button>
+                    </div>
+                </div>
+
+                <div class="cart-info">Add items to the cart</div>
+            </div>
+
+            <!-- Cart and Booking Form -->
+            <div class="cart-booking">
+                <!-- Cart Section -->
+                <div class="cart-section">
+                    <h2>Your Cart</h2>
+                    <div class="cart-items" id="cartItems">
+                        <p style="text-align: center; color: #666; font-style: italic;">No items added yet</p>
+                    </div>
+                    <div class="total-amount">Total: ₹<span id="totalAmount">0</span></div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="booking-form">
+                    <h2>Book Now</h2>
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <button type="submit" class="book-btn">Book Now</button>
+                    </form>
+                    <div class="success-message" id="successMessage">
+                        Thank you for booking the service! We will get back to you soon!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Description -->
+    <section id="about" class="quality-section">
+        <div class="quality-container">
+            <h2>Why Choose CleanCare?</h2>
+            <p>We pride ourselves on delivering exceptional laundry services that set us apart from the competition.</p>
+            
+            <div class="quality-grid">
+                <div class="quality-item">
+                    <h3>Premium Services</h3>
+                    <p>High-quality cleaning with premium detergents and advanced equipment for the best care of your garments.</p>
+                </div>
+                <div class="quality-item">
+                    <h3>Quick Support</h3>
+                    <p>24/7 customer support to address all your queries and ensure a seamless service experience.</p>
+                </div>
+                <div class="quality-item">
+                    <h3>Timely Delivery</h3>
+                    <p>Guaranteed on-time pickup and delivery services to fit your busy schedule.</p>
+                </div>
+                <div class="quality-item">
+                    <h3>Affordable Prices</h3>
+                    <p>Competitive pricing without compromising on quality, making premium laundry services accessible to all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest updates, promotions, and laundry tips!</p>
+            <div class="newsletter-form">
+                <input type="text" placeholder="Full Name" id="newsletterName">
+                <input type="email" placeholder="Email Address" id="newsletterEmail">
+                <button class="subscribe-btn" onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>🧺 CleanCare</h3>
+                <p>Your trusted partner for premium laundry services. We ensure your clothes are treated with the utmost care.</p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📷</a>
+                    <a href="#">💼</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Mission & Vision</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Important Links</h3>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>📞 +91 98765 43210</li>
+                    <li>✉️ info@cleancare.com</li>
+                    <li>📍 123 Clean Street, Laundry City</li>
+                    <li>🕒 Mon-Sat: 8AM-8PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CleanCare Laundry Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+
+        let cart = {};
+        let totalAmount = 0;
+
+        function scrollToBooking() {
+            document.getElementById('services').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function addToCart(serviceName, price) {
+            if (cart[serviceName]) {
+                cart[serviceName].quantity += 1;
+            } else {
+                cart[serviceName] = {
+                    price: price,
+                    quantity: 1
+                };
+            }
+            updateCartDisplay();
+        }
+
+        function removeFromCart(serviceName) {
+            if (cart[serviceName]) {
+                if (cart[serviceName].quantity > 1) {
+                    cart[serviceName].quantity -= 1;
+                } else {
+                    delete cart[serviceName];
+                }
+                updateCartDisplay();
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const totalAmountSpan = document.getElementById('totalAmount');
+            
+            cartItems.innerHTML = '';
+            totalAmount = 0;
+
+            if (Object.keys(cart).length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">No items added yet</p>';
+            } else {
+                Object.keys(cart).forEach(serviceName => {
+                    const item = cart[serviceName];
+                    const itemTotal = item.price * item.quantity;
+                    totalAmount += itemTotal;
+
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <span>${serviceName} x${item.quantity}</span>
+                        <span>₹${itemTotal}</span>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+            }
+
+            totalAmountSpan.textContent = totalAmount;
+        }
+
+        function subscribeNewsletter() {
+            const name = document.getElementById('newsletterName').value;
+            const email = document.getElementById('newsletterEmail').value;
+
+            if (name && email) {
+                alert('Thank you for subscribing to our newsletter!');
+                document.getElementById('newsletterName').value = '';
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                alert('Please fill in both name and email fields.');
+            }
+        }
+
+        // Booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (Object.keys(cart).length === 0) {
+                alert('Please add items to your cart before booking.');
+                return;
+            }
+
+            // Prepare cart details for email
+            let cartDetails = '';
+            Object.keys(cart).forEach(serviceName => {
+                const item = cart[serviceName];
+                cartDetails += `${serviceName} x${item.quantity} - ₹${item.price * item.quantity}\n`;
+            });
+
+            // EmailJS parameters
+            const templateParams = {
+                to_email: email,
+                customer_name: fullName,
+                customer_email: email,
+                customer_phone: phone,
+                service_details: cartDetails,
+                total_amount: totalAmount
+            };
+
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('bookingForm').reset();
+                    cart = {};
+                    updateCartDisplay();
+                }, function(error) {
+                    console.log('Failed to send email...', error);
+                    // Still show success message for demo purposes
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('bookingForm').reset();
+                    cart = {};
+                    updateCartDisplay();
+                });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
