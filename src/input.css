@@ -13,25 +13,41 @@
     }
     .userName {
         p {
-            @apply bg-blue-100 py-2 px-4 rounded;
+            @apply bg-sky-200 py-2 px-4 rounded text-sky-400;
         }
     }
 }
 
 .heroSection {
-    @apply flex m-10 justify-center items-center;
+    @apply flex m-10 mt-0 justify-center items-center;
 }
 
 .leftDiv {
     @apply w-1/2 pl-30;
     #heroHead {
-        @apply text-6xl font-bold leading-20;
+        @apply text-6xl font-bold leading-20 text-gray-600;
     }
     #heroDescription {
-        @apply max-w-lg leading-loose;
+        @apply max-w-lg leading-loose text-gray-500;
+    }
+    #bookButton {
+        @apply bg-sky-400 min-w-xs py-5 rounded-2xl text-white;
     }
 }
 
 .rightDiv {
     @apply w-1/2;
+}
+
+.achievements {
+    @apply flex justify-around items-center bg-sky-400 w-full min-h-full py-10 text-gray-700;
+    #ourachievement {
+        @apply flex-[3] text-center text-5xl font-semibold;
+    }
+    #countDiv {
+        @apply flex-1;
+    }
+    #numCount {
+        @apply text-3xl font-semibold;
+    }
 }
