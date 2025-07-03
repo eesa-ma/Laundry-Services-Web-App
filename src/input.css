@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+body {
+    @apply bg-gray-50;
+}
 .header {
     @apply flex justify-around p-4 ;
     .logo {
@@ -50,4 +53,25 @@
     #numCount {
         @apply text-3xl font-semibold;
     }
+}
+
+.serviceBooking {
+    @apply flex justify-center-safe gap-5 py-20;
+    .rightDivBooking {
+        @apply space-y-5 w-md;
+        .firstDiv {
+            @apply shadow py-3 px-10 bg-white rounded-xl ;
+        }
+        .secondDiv {
+            @apply shadow py-3 px-10 bg-white rounded-xl ; 
+        }
+    }
+    .leftDivBooking {
+        @apply shadow py-3 px-10 bg-white rounded-xl w-xl;
+        h1 {
+            @apply text-3xl font-bold;
+        }
+
+    }
+
 }
