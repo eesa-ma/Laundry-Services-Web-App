@@ -35,8 +35,14 @@ body {
     }
     #bookButton {
         @apply bg-sky-400 min-w-xs py-5 rounded-2xl text-white;
+        &:hover,
+        &:focus {
+            @apply bg-sky-300;
+        }
     }
+
 }
+
 
 .rightDiv {
     @apply w-1/2;
@@ -60,10 +66,45 @@ body {
     .rightDivBooking {
         @apply space-y-5 w-md;
         .firstDiv {
-            @apply shadow py-3 px-10 bg-white rounded-xl ;
+            @apply shadow py-3 px-10 bg-white rounded-xl;
+            table {
+                @apply w-full text-left;
+            }
+            h1 {
+                @apply text-xl font-bold text-center; 
+            }
         }
         .secondDiv {
-            @apply shadow py-3 px-10 bg-white rounded-xl ; 
+            @apply flex flex-col gap-2 shadow py-3 px-10 bg-white rounded-xl;
+            h1 {
+                @apply text-lg font-bold;
+            }
+            form {
+                @apply flex flex-col gap-2;
+                label {
+                    @apply font-semibold;
+                }
+                input {
+                    @apply ring ring-gray-300 h-10 p-2 rounded w-full shadow outline-none;
+                    &:focus,
+                    &:hover {
+                        @apply ring-sky-400;
+                    } 
+                }
+                .form-group {
+                    @apply flex flex-col space-y-2;
+                }
+                .email-phone-wrapper {
+                    @apply flex gap-4;
+                }
+            }
+            #submitBooking {
+                @apply w-full mt-4 bg-sky-400 py-3 rounded-2xl shadow;
+                &:hover,
+                &:focus {
+                    @apply bg-sky-300;
+                }
+            }
         }
     }
     .leftDivBooking {
