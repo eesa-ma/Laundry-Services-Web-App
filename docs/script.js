@@ -7,32 +7,32 @@ heroDescription.textContent = "From premium dry cleaning to swift wash and fold,
 
 const Services = [
     {
-        image: "/public/images/drycleaning.png",
+        image: "./images/drycleaning.png",
         type: "Dry Cleaning",
         price: 200.00
     },
     {
-        image: "/public/images/washandfold.png",
+        image: "./images/washandfold.png",
         type: "Wash & Fold",
         price: 100.00
     },
     {
-        image: "/public/images/ironing.png",
+        image: "./images/ironing.png",
         type: "Ironing",
         price: 30.00
     },
     {
-        image: "/public/images/stainremoval.png",
+        image: "./images/stainremoval.png",
         type: "Stain Removal",
         price: 500.00
     },
     {
-        image: "/public/images/leather.png",
+        image: "./images/leather.png",
         type: "Leather & Suede Cleaning",
         price: 999.00
     },
     {
-        image: "/public/images/weddingdress.png",
+        image: "./images/weddingdress.png",
         type: "Wedding Dress Cleaning",
         price: 2800.00
     }
@@ -63,7 +63,7 @@ function displayServices() {
 
         const addButton = document.createElement("button");
         addButton.id = `addButton-${index}`;
-        addButton.innerHTML = `Add Item <img src="/public/images/plussymbol.png" class="inline w-4 h-4 ml-2">`;
+        addButton.innerHTML = `Add Item <img src="./images/plussymbol.png" class="inline w-4 h-4 ml-2">`;
         addButton.classList.add("bg-gray-200", "py-2", "px-4", "rounded-xl", "font-semibold", "text-gray-800");
 
         serviceTypeDiv.appendChild(icon);
@@ -129,11 +129,11 @@ function toggleCartItem(index) {
 
     if (isAdding) {
         addToCart(index);
-        button.innerHTML = `Remove Item <img src="/public/images/minussymbol.png" class="inline w-4 h-4">`;
+        button.innerHTML = `Remove Item <img src="./images/minussymbol.png" class="inline w-4 h-4">`;
 
     } else {
         removeFromCart(index);
-        button.innerHTML = `Add Item <img src="/public/images/plussymbol.png" class="inline w-4 h-4 ml-2">`;
+        button.innerHTML = `Add Item <img src="./images/plussymbol.png" class="inline w-4 h-4 ml-2">`;
 
     }
     findTotalPrice();
