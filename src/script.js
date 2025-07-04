@@ -42,14 +42,14 @@ const serviceTypeDisplay = document.createElement("div");
 serviceTypeDisplay.id = "serviceTypeDisplay";
 
 function displayServices() {
-    Services.map((service,index) => {
+    Services.map((service, index) => {
         serviceTypeDisplay.classList.add("flex", "flex-col", "gap-10", "p-5");
 
         const serviceTypeDivContainer = document.createElement("div");
-        serviceTypeDivContainer.classList.add("flex","justify-between");
+        serviceTypeDivContainer.classList.add("flex", "justify-between");
 
         const serviceTypeDiv = document.createElement("div");
-        serviceTypeDiv.classList.add("flex","gap-5");
+        serviceTypeDiv.classList.add("flex", "gap-5");
 
         const icon = document.createElement("img");
         icon.src = service.image;
@@ -64,14 +64,14 @@ function displayServices() {
         const addButton = document.createElement("button");
         addButton.id = `addButton-${index}`;
         addButton.innerHTML = `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`;
-        addButton.classList.add("bg-gray-200","py-2","px-4", "rounded-xl","font-semibold","text-gray-800");        
+        addButton.classList.add("bg-gray-200", "py-2", "px-4", "rounded-xl", "font-semibold", "text-gray-800");
 
         serviceTypeDiv.appendChild(icon);
         serviceTypeDiv.append(serviceType);
         serviceTypeDiv.append(servicePrice);
 
         serviceTypeDivContainer.append(serviceTypeDiv, addButton);
-        
+
         serviceTypeDisplay.append(serviceTypeDivContainer);
         document.getElementById("leftDivBooking").append(serviceTypeDisplay);
     });
@@ -79,14 +79,11 @@ function displayServices() {
 
 displayServices();
 
-const addButton0 = document.getElementById("addButton-0");
-const addButton1 = document.getElementById("addButton-1");
-const addButton2 = document.getElementById("addButton-2");
-const addButton3 = document.getElementById("addButton-3");
-const addButton4 = document.getElementById("addButton-4");
-const addButton5 = document.getElementById("addButton-5");
-
 let serialNo = 0;
+let totalPrice = 0;
+let cartIndices = [];
+let cartRows = [];
+
 
 function addToCart(index) {
     const noItems = document.getElementById("noItems");
@@ -103,54 +100,57 @@ function addToCart(index) {
     serviceType.textContent = Services[index].type;
     servicePrice.textContent = `$${Services[index].price}`;
 
-    tableRow.append(serialNo,serviceType,servicePrice);
+    tableRow.append(sNo, serviceType, servicePrice);
 
     document.getElementById("cartItems").append(tableRow);
 
+    cartIndices.push(index);
+    cartRows[index] = tableRow;
+
+}
+
+function removeFromCart(index) {
+    const row = cartRows[index];
+    if (row) {
+        row.remove(); 
+        cartIndices = cartIndices.filter(i => i !== index);
+        cartRows[index] = null; 
+    }
+
+    if (cartIndices.length === 0) {
+        document.getElementById("noItems").classList.remove("hidden");
+    }
 }
 
 
+function toggleCartItem(index) {
+    const button = document.getElementById(`addButton-${index}`);
+    const isAdding = button.textContent.includes("Add Item");
 
-addButton0.addEventListener("click",() => {
-    if(addButton0.innerHTML === `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`) {
-        addToCart(0);
-        addButton0.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
+    if (isAdding) {
+        addToCart(index);
+        button.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
+
+    } else {
+        removeFromCart(index);
+        button.innerHTML = `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`;
+
     }
-    
+    findTotalPrice();
+}
 
-});
-addButton1.addEventListener("click",() => {
-    if(addButton1.innerHTML === `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`) {
-        addToCart(1);
-        addButton1.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
-    }
+function findTotalPrice() {
+    totalPrice = 0;
+    cartIndices.forEach(index => {
+        totalPrice = totalPrice + Services[index].price;
 
-});
-addButton2.addEventListener("click",() => {
-    if(addButton2.innerHTML === `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`) {
-        addToCart(2);
-        addButton2.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
-    }
+    });
+    document.getElementById("totalAmount").textContent = `$${totalPrice}`;
+}
 
+Services.forEach((service, index) => {
+    document.getElementById(`addButton-${index}`).addEventListener("click", () => {
+        toggleCartItem(index);
+    });
 });
-addButton3.addEventListener("click",() => {
-    if(addButton3.innerHTML === `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`) {
-        addToCart(3);
-        addButton3.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
-    }
 
-});
-addButton4.addEventListener("click",() => {
-    if(addButton4.innerHTML === `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`) {
-        addToCart(4);
-        addButton4.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
-    }
-
-});
-addButton5.addEventListener("click",() => {
-    if(addButton5.innerHTML === `Add Item <img src="../assets/images/plussymbol.png" class="inline w-4 h-4 ml-2">`) {
-        addToCart(5);
-        addButton5.innerHTML = `Remove Item <img src="../assets/images/minussymbol.png" class="inline w-4 h-4">`;
-    }
-
-});

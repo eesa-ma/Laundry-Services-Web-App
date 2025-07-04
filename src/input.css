@@ -3,6 +3,7 @@
 body {
     @apply bg-gray-50;
 }
+
 .header {
     @apply flex justify-around p-4 ;
     .logo {
@@ -45,20 +46,19 @@ body {
 
 }
 
-
 .rightDiv {
     @apply w-1/2;
 }
 
 .achievements {
     @apply flex justify-around items-center bg-sky-400 w-full min-h-full py-10 text-gray-700;
-    #ourachievement {
+    .ourachievement {
         @apply flex-[3] text-center text-5xl font-semibold;
     }
-    #countDiv {
+    .countDiv {
         @apply flex-1;
     }
-    #numCount {
+    .numCount {
         @apply text-3xl font-semibold;
     }
 }
