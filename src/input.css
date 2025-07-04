@@ -35,9 +35,11 @@ body {
     }
     #bookButton {
         @apply bg-sky-400 min-w-xs py-5 rounded-2xl text-white;
-        &:hover,
-        &:focus {
+        &:hover {
             @apply bg-sky-300;
+        }
+        &:focus {
+            @apply ring ring-sky-300;
         }
     }
 
@@ -66,7 +68,7 @@ body {
     .rightDivBooking {
         @apply space-y-5 w-md;
         .firstDiv {
-            @apply shadow py-3 px-10 bg-white rounded-xl;
+            @apply shadow py-3 px-10 bg-white rounded-xl min-h-72;
             table {
                 @apply w-full text-left;
             }
@@ -86,10 +88,12 @@ body {
                 }
                 input {
                     @apply ring ring-gray-300 h-10 p-2 rounded w-full shadow outline-none;
-                    &:focus,
                     &:hover {
                         @apply ring-sky-400;
                     } 
+                    &:focus {
+                        @apply ring ring-sky-300;
+                    }
                 }
                 .form-group {
                     @apply flex flex-col space-y-2;
