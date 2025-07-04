@@ -1,30 +1,40 @@
-# Node dependencies
-node_modules/
+# Design files (please do not remove 🙂)
+*.sketch
+*.fig
+*.xd
 
-# Tailwind CLI cache
-.tailwind-cache/
-
-# Tailwind output CSS
-src/output.css
-
-# Build folders (if used)
-build/
-dist/
-
-# Logs
-*.log
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+yarn.debug.log*
+yarn.error.log*
 npm-debug.log*
 
-# Environment files
+# Environment and secrets
 .env
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Editor folders and swap files
-.vscode/
-.idea/
+# Testing
+/coverage
+
+# Production
+/build
+/dist
+/.next
+/out
+
+# IDEs and editors
+/.idea
+/.vscode
 *.swp
 *.swo
 
-# System files
+# Misc
+*.log
+*.pem
 .DS_Store
 Thumbs.db
