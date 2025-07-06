@@ -53,7 +53,7 @@ qualityServices.map(qualityService => {
 document.body.append(qualitySection);
 
 const subscribeSection = document.createElement("section");
-subscribeSection.classList.add("bg-sky-400", "py-10", "px-20", "flex");
+subscribeSection.classList.add("bg-sky-400", "p-20", "flex");
 
 const headText = document.createElement("h1");
 headText.textContent = "Subscribe to our newsletter.";
