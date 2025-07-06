@@ -103,11 +103,6 @@ const impLinkDiv = document.createElement("div");
 const contactDiv = document.createElement("div");
 const followusDiv = document.createElement("div");
 
-logoDiv.classList.add("w-1/4");
-impLinkDiv.classList.add("w-1/4");
-contactDiv.classList.add("w-1/4");
-followusDiv.classList.add("w-1/4");
-
 logoDiv.innerHTML = `
   <div class="flex flex-col items-center text-center">
     <img src="./images/logo.png" class="w-20 mb-2" />
