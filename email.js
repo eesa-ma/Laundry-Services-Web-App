@@ -1,6 +1,4 @@
-
-
-emailjs.init("moxECaD5XmqZEu5Xj");
+import { Services, cartIndices } from './script.js';
 
 const bookNowButton = document.getElementById("submitBooking");
 
@@ -11,7 +9,7 @@ bookNowButton.addEventListener("click", function (e) {
     const email = document.getElementById("userEmail");
     const phone = document.getElementById("userPhoneNumber");
 
-    const serviceList = cartIndices.map(index => `- ${Services[index].name}`).join("\n");
+    const serviceList = cartIndices.map(index => `- ${Services[index].type}`).join("\n");
 
     const totalPrice = cartIndices.reduce((sum, index) => sum + Services[index].price, 0);
 
@@ -25,6 +23,10 @@ bookNowButton.addEventListener("click", function (e) {
         .then(() => {
             document.getElementById("bookingMessage").textContent =
                 "Thank you for booking the service. We will get back to you soon!";
+
+            setTimeout(() => {
+                location.reload();
+            }, 4000);
         })
         .catch((error) => {
             alert("Failed to send email. Please try again.");
