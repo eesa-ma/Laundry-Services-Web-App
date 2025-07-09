@@ -79,47 +79,63 @@ function displayServices() {
 
 displayServices();
 
-let serialNo = 0;
 let totalPrice = 0;
 let cartIndices = [];
-let cartRows = [];
 
+function updateSerialNumbers() {
+    const rows = document.querySelectorAll("#cartItems tr:not(#noItems)");
+    rows.forEach((row, i) => {
+        const sNoCell = row.querySelector("td");
+        if (sNoCell) {
+            sNoCell.textContent = i + 1;
+        }
+    });
+
+    
+}
 
 function addToCart(index) {
     const noItems = document.getElementById("noItems");
     noItems.classList.add("hidden");
 
-    serialNo++;
-
     const tableRow = document.createElement("tr");
+    tableRow.dataset.index = index; // for identifying later
+
     const sNo = document.createElement("td");
     const serviceType = document.createElement("td");
     const servicePrice = document.createElement("td");
 
-    sNo.textContent = serialNo;
+    sNo.textContent = "-"; // temporary, we'll update it later
     serviceType.textContent = Services[index].type;
     servicePrice.textContent = `$${Services[index].price}`;
 
     tableRow.append(sNo, serviceType, servicePrice);
-
     document.getElementById("cartItems").append(tableRow);
 
     cartIndices.push(index);
-    cartRows[index] = tableRow;
 
+    updateSerialNumbers(); // 👈 update serial numbers
 }
 
+
 function removeFromCart(index) {
-    const row = cartRows[index];
-    if (row) {
-        row.remove(); 
-        cartIndices = cartIndices.filter(i => i !== index);
-        cartRows[index] = null; 
+    const cartTable = document.getElementById("cartItems");
+    const rows = Array.from(cartTable.querySelectorAll("tr"));
+
+    for (const row of rows) {
+        if (parseInt(row.dataset.index) === index) {
+            row.remove();
+            break;
+        }
     }
+
+    cartIndices = cartIndices.filter(i => i !== index);
 
     if (cartIndices.length === 0) {
         document.getElementById("noItems").classList.remove("hidden");
     }
+
+    updateSerialNumbers(); // 👈 also here
 }
 
 
