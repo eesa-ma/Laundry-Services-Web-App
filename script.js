@@ -5,7 +5,7 @@ herohead.innerHTML = "<span>Revitalize Your Clothes With Expert</span> <br> <spa
 
 heroDescription.textContent = "From premium dry cleaning to swift wash and fold, we deliver care and convenience.Schedule a pickup and rediscover the freshness of your clothes today!";
 
-const Services = [
+export const Services = [
     {
         image: "./images/drycleaning.png",
         type: "Dry Cleaning",
@@ -80,7 +80,7 @@ function displayServices() {
 displayServices();
 
 let totalPrice = 0;
-let cartIndices = [];
+export let cartIndices = [];
 
 function updateSerialNumbers() {
     const rows = document.querySelectorAll("#cartItems tr:not(#noItems)");
@@ -169,5 +169,9 @@ Services.forEach((service, index) => {
         toggleCartItem(index);
     });
 });
+
+
+
+
 
 
