@@ -9,6 +9,17 @@ bookNowButton.addEventListener("click", function (e) {
     const email = document.getElementById("userEmail");
     const phone = document.getElementById("userPhoneNumber");
 
+    if (cartIndices.length === 0) {
+        alert("Please select at least one service before booking.");
+        return;
+    }
+
+
+     if (!fullName.value.trim() || !email.value.trim() || !phone.value.trim()) {
+        alert("Please fill in all the required fields.");
+        return;
+    }
+
     const serviceList = cartIndices.map(index => `- ${Services[index].type}`).join("\n");
 
     const totalPrice = cartIndices.reduce((sum, index) => sum + Services[index].price, 0);
